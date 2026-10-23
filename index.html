@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="sl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Najboljši prijatelj</title>
+<meta name="description" content="Varstvo psov na domu v Ljubljani: pasji vrtec in varstvo z nočitvijo. Velik ograjen vrt, dva sprehoda dnevno, omejeno število psov.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one long garden-path page — hero with photo collage, facts strip, services, steps, prices + calculator, gallery, contact. */
+:root{
+  --bg:#F2F5EF; --surface:#FFFFFF; --ink:#1B2620; --muted:#55645B;
+  --meadow:#2E6A4C; --meadow-deep:#1F4A35; --leash:#EE9A35; --leash-ink:#3A2508;
+  --line:#D6DED6; --ph:#DCE6DC; --ph-ink:#7C8F82;
+  --display:"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --body:"Figtree", "Segoe UI", system-ui, sans-serif;
+  --r:14px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121A15; --surface:#1A241E; --ink:#E7EEE8; --muted:#A3B3A8;
+  --meadow:#6FBE93; --meadow-deep:#0E2A1C; --leash:#F2A84B; --leash-ink:#2A1A04;
+  --line:#2C3A31; --ph:#223028; --ph-ink:#7E9586; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121A15; --surface:#1A241E; --ink:#E7EEE8; --muted:#A3B3A8;
+  --meadow:#6FBE93; --meadow-deep:#0E2A1C; --leash:#F2A84B; --leash-ink:#2A1A04;
+  --line:#2C3A31; --ph:#223028; --ph-ink:#7E9586; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6}
+img{max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);line-height:1.08;text-wrap:balance;margin:0;letter-spacing:-.01em}
+h2{font-size:clamp(30px,4.4vw,46px);font-weight:800}
+h3{font-size:22px;font-weight:700}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--leash);outline-offset:3px;border-radius:6px}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--meadow)}
+.lead{font-size:19px;color:var(--muted);max-width:60ch}
+section{padding-block:clamp(56px,8vw,96px)}
+.sec-head{display:grid;gap:14px;margin-bottom:40px}
+
+/* header */
+header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--display);font-weight:800;font-size:20px}
+.brand svg{width:34px;height:34px;flex:none}
+nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-weight:600;font-size:15px}
+nav a{text-decoration:none;color:var(--muted)}
+nav a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;text-decoration:none;border-radius:999px;padding:11px 20px;border:2px solid transparent;cursor:pointer;font-family:var(--body)}
+.btn-primary{background:var(--leash);color:var(--leash-ink)}
+.btn-primary:hover{filter:brightness(1.05)}
+.btn-ghost{border-color:var(--line);color:var(--ink);background:var(--surface)}
+@media (max-width:820px){nav ul{display:none}}
+@media (max-width:400px){.brand{font-size:17px}.bar .btn{padding:9px 14px;font-size:14px}}
+
+/* hero */
+.hero{padding-block:clamp(40px,6vw,72px) clamp(48px,7vw,88px)}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(28px,5vw,64px);align-items:center}
+.hero h1{font-size:clamp(42px,6.6vw,78px);font-weight:800}
+.hero h1 em{font-style:normal;color:var(--meadow)}
+.hero-copy{display:grid;gap:24px;min-width:0}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+.hero-note{font-size:14px;color:var(--muted)}
+.collage{display:grid;grid-template-columns:1fr 1fr;gap:14px;min-width:0}
+.collage .ph:first-child{grid-column:span 2;aspect-ratio:16/10}
+.collage .ph{aspect-ratio:1/1}
+@media (max-width:820px){.hero-grid{grid-template-columns:1fr}}
+
+/* photo slots */
+.ph{position:relative;border-radius:var(--r);overflow:hidden;background:var(--ph);max-width:100%}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.ph .fb{position:absolute;inset:0;display:none;place-items:center;align-content:center;gap:6px;color:var(--ph-ink);font-size:13px;font-weight:600;text-align:center;padding:12px}
+.ph .fb svg{width:38px;height:38px;opacity:.8}
+.ph.missing img{display:none}
+.ph.missing .fb{display:grid}
+
+/* facts */
+.facts{background:var(--meadow-deep);color:#EAF3EC}
+.facts .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;padding-block:34px}
+.fact{display:grid;gap:4px;min-width:0}
+.fact b{font-family:var(--display);font-size:26px;font-weight:800;color:#FFFFFF}
+.fact span{font-size:15px;opacity:.85}
+@media (max-width:820px){.facts .wrap{grid-template-columns:repeat(2,1fr)}}
+
+/* services */
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.svc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:28px;display:grid;gap:12px;align-content:start;min-width:0}
+.svc .ico{width:48px;height:48px;border-radius:12px;background:color-mix(in srgb,var(--meadow) 14%,transparent);display:grid;place-items:center;color:var(--meadow)}
+.svc .ico svg{width:26px;height:26px}
+.svc p{color:var(--muted)}
+.svc .from{font-weight:700;color:var(--ink);font-size:15px}
+@media (max-width:900px){.services{grid-template-columns:1fr}}
+
+/* photo band */
+.band{display:grid;grid-template-columns:1.4fr 1fr;gap:14px;margin-top:20px}
+.band .ph{aspect-ratio:16/9}
+@media (max-width:700px){.band{grid-template-columns:1fr}}
+
+/* steps + rules */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);align-items:start}
+@media (max-width:860px){.split{grid-template-columns:1fr}}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:22px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:48px 1fr;gap:16px;counter-increment:s}
+.steps li::before{content:counter(s);width:48px;height:48px;border-radius:50%;background:var(--leash);color:var(--leash-ink);font-family:var(--display);font-weight:800;font-size:22px;display:grid;place-items:center}
+.steps h3{font-size:20px;margin-bottom:4px}
+.steps p{color:var(--muted)}
+.rules{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:28px;display:grid;gap:16px}
+.rules ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.rules li{display:grid;grid-template-columns:24px 1fr;gap:10px}
+.rules li svg{width:22px;height:22px;color:var(--meadow);margin-top:3px}
+.rules .no{color:var(--muted);font-size:15px;border-top:1px solid var(--line);padding-top:14px}
+
+/* prices */
+.price-band{background:var(--surface);border-block:1px solid var(--line)}
+.price-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;align-items:start}
+@media (max-width:900px){.price-grid{grid-template-columns:1fr}}
+.tabs{display:inline-flex;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:4px;gap:4px;margin-bottom:18px;flex-wrap:wrap}
+.tabs button{border:0;background:transparent;color:var(--muted);font:600 15px var(--body);padding:9px 16px;border-radius:999px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--meadow);color:var(--bg)}
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:14px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+td.p{text-align:right;font-family:var(--display);font-weight:800;font-size:22px;white-space:nowrap}
+th.p{text-align:right}
+td small{display:block;color:var(--muted);font-size:14px}
+.price-notes{display:grid;gap:8px;margin-top:20px;font-size:15px;color:var(--muted)}
+.price-notes strong{color:var(--ink)}
+.valid{font-size:13px;color:var(--muted);margin-top:14px}
+
+.calc{background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:26px;display:grid;gap:18px;min-width:0}
+.calc label{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:10px}
+.calc input[type=range]{width:100%;accent-color:var(--meadow)}
+.check{display:flex!important;justify-content:flex-start!important;align-items:center;gap:10px;font-weight:500!important}
+.check input{width:18px;height:18px;accent-color:var(--meadow);flex:none}
+.seg{display:flex;gap:8px}
+.seg button{flex:1;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 15px var(--body);padding:10px;border-radius:10px;cursor:pointer}
+.seg button[aria-pressed="true"]{border-color:var(--meadow);background:color-mix(in srgb,var(--meadow) 14%,var(--surface))}
+.total{border-top:1px dashed var(--line);padding-top:16px;display:grid;gap:4px}
+.total b{font-family:var(--display);font-size:40px;font-weight:800;color:var(--meadow);font-variant-numeric:tabular-nums}
+.total span{font-size:14px;color:var(--muted)}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.gallery .ph{aspect-ratio:1/1}
+.gallery a{display:block;border-radius:var(--r)}
+.gallery img{transition:transform .3s ease}
+.gallery a:hover img{transform:scale(1.04)}
+@media (max-width:900px){.gallery{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:520px){.gallery{grid-template-columns:repeat(2,1fr)}}
+.gal-foot{margin-top:24px}
+
+/* lightbox */
+dialog.lb{border:0;padding:0;background:transparent;max-width:min(96vw,1200px);max-height:92vh}
+dialog.lb::backdrop{background:rgba(10,16,12,.86)}
+dialog.lb img{display:block;max-width:100%;max-height:86vh;border-radius:10px;margin:0 auto}
+.lb-bar{display:flex;justify-content:center;gap:10px;margin-top:10px}
+.lb-bar button{border:0;border-radius:999px;background:#fff;color:#1B2620;font:700 15px var(--body);padding:9px 16px;cursor:pointer}
+
+/* contact */
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:900px){.contact-grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:26px;display:grid;gap:14px;align-content:start;min-width:0}
+.person{display:grid;gap:2px}
+.person b{font-size:18px}
+.num{font-family:var(--display);font-weight:700;font-size:24px;font-variant-numeric:tabular-nums;user-select:all;text-decoration:none;color:var(--meadow)}
+.hours{display:grid;grid-template-columns:1fr auto;gap:8px 16px;font-variant-numeric:tabular-nums;margin:0}
+.hours dt{color:var(--muted)}
+.hours dd{margin:0;font-weight:700}
+.card .small{font-size:14px;color:var(--muted)}
+.linkline{font-weight:700;color:var(--meadow)}
+.social{display:flex;align-items:center;gap:12px;text-decoration:none;border:1px solid var(--line);border-radius:12px;padding:10px 14px 10px 10px;margin-top:4px;transition:border-color .2s,background .2s}
+.social:hover{border-color:#1877F2;background:color-mix(in srgb,#1877F2 6%,var(--surface))}
+.social-ico{width:40px;height:40px;flex:none;color:#1877F2;display:grid;place-items:center}
+.social-ico svg{width:40px;height:40px}
+.social b{display:block;font-size:16px;line-height:1.2}
+.social small{display:block;font-size:13px;color:var(--muted)}
+.btn-ico{width:20px;height:20px;color:#1877F2}
+
+footer{border-top:1px solid var(--line);padding-block:32px;font-size:14px;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px}
+.site-credit{flex-basis:100%;margin:0;font-size:.85rem;opacity:.75;border-top:1px solid var(--line);padding-top:14px}
+.site-credit a{color:inherit;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.site-credit a:hover{opacity:1;color:var(--meadow)}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="paw" viewBox="0 0 32 32"><g fill="currentColor"><ellipse cx="9" cy="11" rx="3.2" ry="4.2"/><ellipse cx="16" cy="8" rx="3.2" ry="4.4"/><ellipse cx="23" cy="11" rx="3.2" ry="4.2"/><ellipse cx="27" cy="18" rx="2.6" ry="3.4"/><ellipse cx="5" cy="18" rx="2.6" ry="3.4"/><path d="M16 15c-4.6 0-9 6.2-9 9.6C7 27.4 9.4 28 12 27.2c1.6-.5 2.6-.8 4-.8s2.4.3 4 .8c2.6.8 5 .2 5-2.6 0-3.4-4.4-9.6-9-9.6z"/></g></symbol>
+  <symbol id="facebook" viewBox="0 0 24 24"><path fill="currentColor" d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></symbol>
+  <symbol id="check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></g></symbol>
+  <symbol id="moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="bulb" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.4 1.1 2.2h5c0-.8.4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/></g></symbol>
+</svg>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Najboljši prijatelj, na vrh strani">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="var(--meadow)"/><use href="#paw" x="8" y="8" width="24" height="24" style="color:var(--bg)"/></svg>
+      Najboljši prijatelj
+    </a>
+    <nav aria-label="Glavna navigacija"><ul>
+      <li><a href="#storitve">Storitve</a></li>
+      <li><a href="#potek">Kako poteka</a></li>
+      <li><a href="#cenik">Cenik</a></li>
+      <li><a href="#galerija">Galerija</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul></nav>
+    <a class="btn btn-primary" href="#kontakt">Rezervirajte</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Varstvo psov na domu · Ljubljana</span>
+        <h1>Za vašega psa skrbimo <em>tako kot za svojega.</em></h1>
+        <p class="lead">Psi živijo z nami v pritličju hiše na obrobju mesta. Imajo čista ležišča, velik ograjen vrt za igro in dva sprehoda dnevno po mirni okolici. Pri nas so nekaj ur, ko ste v službi, ali več dni, ko ste na poti.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#kontakt">Pokličite za termin</a>
+          <a class="btn btn-ghost" href="#cenik">Poglejte cenik</a>
+        </div>
+        <p class="hero-note">Število psov je omejeno, zato termine rezerviramo vnaprej po telefonu.</p>
+      </div>
+      <div class="collage">
+        <div class="ph"><img src="img/fb-trop-2.jpg" alt="Pet psov različnih pasem skupaj na dvorišču" style="object-position:50% 60%"><div class="fb"><svg><use href="#paw"/></svg>Psi na dvorišču</div></div>
+        <div class="ph"><img src="img/fb-crni.jpg" alt="Črn dolgodlaki pes počiva na tlakovcih" style="object-position:32% 50%"><div class="fb"><svg><use href="#paw"/></svg>Pes v varstvu</div></div>
+        <div class="ph"><img src="img/fb-sprehod.jpg" alt="Velik kosmat pes počiva na travi med sprehodom" style="object-position:62% 50%"><div class="fb"><svg><use href="#paw"/></svg>Na sprehodu</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="facts">
+    <div class="wrap">
+      <div class="fact"><b>Doma, ne v boksu</b><span>Psi bivajo z nami v hiši</span></div>
+      <div class="fact"><b>Ograjen vrt</b><span>Velik prostor za igro in druženje</span></div>
+      <div class="fact"><b>2 × na dan</b><span>Sprehod v naravi blizu doma</span></div>
+      <div class="fact"><b>7 dni v tednu</b><span>Tudi ob vikendih in praznikih</span></div>
+    </div>
+  </div>
+
+  <section id="storitve">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Storitve</span>
+        <h2>Varstvo za en dan ali za ves dopust</h2>
+      </div>
+      <div class="services">
+        <article class="svc">
+          <div class="ico"><svg><use href="#sun"/></svg></div>
+          <h3>Pasji vrtec</h3>
+          <p>Dnevno varstvo, ko ste v službi. Psa pripeljete zjutraj in ga poberete popoldne. Med tem se igra na vrtu, gre na sprehod in počiva na svojem ležišču.</p>
+          <p class="from">od 15 € na dan</p>
+        </article>
+        <article class="svc">
+          <div class="ico"><svg><use href="#moon"/></svg></div>
+          <h3>Varstvo z nočitvijo</h3>
+          <p>Celodnevno varstvo za več dni, ko pri nas tudi prespi. Psi so lahko skupaj z drugimi ali v ločenem prostoru, če se med seboj ne razumejo.</p>
+          <p class="from">od 20 € na dan</p>
+        </article>
+        <article class="svc">
+          <div class="ico"><svg><use href="#bulb"/></svg></div>
+          <h3>Nasveti skrbnikom</h3>
+          <p>Svetujemo, kako bolje razumeti vedenje vašega psa, kako izboljšati oskrbo in socializacijo ter kako naj bo čas varstva čim bolj miren za psa in za vas.</p>
+          <p class="from">ob vsakem obisku</p>
+        </article>
+      </div>
+      <div class="band">
+        <div class="ph"><img loading="lazy" src="img/fb-skupina.jpg" alt="Štirje psi mirno ležijo skupaj na dvorišču" style="object-position:50% 40%"><div class="fb"><svg><use href="#paw"/></svg>Skupina psov</div></div>
+        <div class="ph"><img loading="lazy" src="img/fb-trop-1.jpg" alt="Psi v varstvu se družijo na dvorišču" style="object-position:40% 50%"><div class="fb"><svg><use href="#paw"/></svg>Druženje</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="potek" style="padding-top:0">
+    <div class="wrap split">
+      <div>
+        <div class="sec-head">
+          <span class="eyebrow">Kako poteka</span>
+          <h2>Od klica do prvega dne pri nas</h2>
+        </div>
+        <ol class="steps">
+          <li><div><h3>Pokličite in rezervirajte</h3><p>Vse rezervacije sprejemamo vnaprej po telefonu, ker je mest malo.</p></div></li>
+          <li><div><h3>Uvodno srečanje</h3><p>Pred prvim varstvom se obvezno spoznamo: mi, vaš pes in naši psi.</p></div></li>
+          <li><div><h3>Prihod in plačilo</h3><p>Varstvo plačate vnaprej, ob prihodu. Prinesite potrdilo o cepljenjih.</p></div></li>
+        </ol>
+      </div>
+      <aside class="rules" aria-labelledby="pogoji">
+        <h3 id="pogoji">Obvezni pogoji za pse</h3>
+        <ul>
+          <li><svg><use href="#check"/></svg><span>Potrdilo o opravljenih cepljenjih</span></li>
+          <li><svg><use href="#check"/></svg><span>Aktivna zaščita proti bolham</span></li>
+          <li><svg><use href="#check"/></svg><span>Redna zaščita proti glistam in trakulji, 4-krat letno</span></li>
+        </ul>
+        <p class="no">Ne sprejemamo agresivnih psov in psic v času gonitve. Rezervacijo lahko zavrnemo za pse, ki so nam že povzročali resnejše težave, ali če jim zaradi posebnih potreb ne moremo zagotoviti ločene namestitve.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section id="cenik" class="price-band">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Cenik</span>
+        <h2>Jasne cene, plačilo ob prihodu</h2>
+      </div>
+      <div class="price-grid">
+        <div style="min-width:0">
+          <div class="tabs" role="tablist" aria-label="Vrsta varstva">
+            <button role="tab" id="t-night" aria-selected="true" aria-controls="p-night">Z nočitvijo</button>
+            <button role="tab" id="t-day" aria-selected="false" aria-controls="p-day">Pasji vrtec</button>
+          </div>
+          <div id="p-night" role="tabpanel" aria-labelledby="t-night" class="tbl-wrap">
+            <table>
+              <thead><tr><th>Trajanje</th><th class="p">Cena na dan</th></tr></thead>
+              <tbody>
+                <tr><td>1 dan</td><td class="p">33 €</td></tr>
+                <tr><td>2–3 dni</td><td class="p">30 €</td></tr>
+                <tr><td>4–7 dni</td><td class="p">27 €</td></tr>
+                <tr><td>8–14 dni</td><td class="p">24 €</td></tr>
+                <tr><td>15–20 dni</td><td class="p">21 €</td></tr>
+                <tr><td>21–30 dni</td><td class="p">20 €</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="p-day" role="tabpanel" aria-labelledby="t-day" class="tbl-wrap" hidden>
+            <table>
+              <thead><tr><th>Varstvo</th><th class="p">Cena na dan</th></tr></thead>
+              <tbody>
+                <tr><td>Dnevno varstvo<small>pon–pet, sprejem in oddaja 7.00–18.00</small></td><td class="p">20 €</td></tr>
+                <tr><td>10 dni ali več na mesec<small>pon–pet, sprejem in oddaja 7.00–18.00</small></td><td class="p">15 €</td></tr>
+                <tr><td>Sobota, nedelja in prazniki<small>sprejem in oddaja 8.00–20.00</small></td><td class="p">30 €</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="price-notes">
+            <p><strong>Dva psa iz istega doma:</strong> drugi pes ima 50 % popusta, ko sta pri nas hkrati.</p>
+            <p><strong>Doplačilo 5 € na dan:</strong> mladiči, nesocializirani psi, nekastrirani samci ter psi s posebnimi potrebami ali zahtevno oskrbo.</p>
+          </div>
+          <p class="valid">Cenik velja od 8. 10. 2025.</p>
+        </div>
+
+        <form class="calc" id="calc" aria-labelledby="calc-h">
+          <h3 id="calc-h">Izračunajte ceno varstva z nočitvijo</h3>
+          <div>
+            <label for="days"><span>Število dni</span><span id="days-out">7</span></label>
+            <input type="range" id="days" min="1" max="30" value="7">
+          </div>
+          <div>
+            <label id="dogs-l">Število psov</label>
+            <div class="seg" role="group" aria-labelledby="dogs-l">
+              <button type="button" id="dog1" aria-pressed="true">1 pes</button>
+              <button type="button" id="dog2" aria-pressed="false">2 psa</button>
+            </div>
+          </div>
+          <label class="check" for="extra"><input type="checkbox" id="extra">Mladič, nekastriran samec ali posebne potrebe (+5 €/dan)</label>
+          <div class="total" aria-live="polite">
+            <b id="total">189 €</b>
+            <span id="breakdown">7 dni × 27 €</span>
+          </div>
+          <p style="font-size:13px;color:var(--muted)">Informativni izračun. Končno ceno potrdimo ob rezervaciji.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section id="galerija">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Galerija</span>
+        <h2>Naši gostje</h2>
+        <p class="lead">Nekaj kosmatih prijateljev, ki so pri nas preživeli dan ali počitnice.</p>
+      </div>
+      <div class="gallery" id="gallery"></div>
+      <p class="gal-foot"><a class="btn btn-ghost" href="https://www.facebook.com/pasji.vrtec" target="_blank" rel="noopener"><svg class="btn-ico" aria-hidden="true"><use href="#facebook"/></svg>Več fotografij na Facebooku</a></p>
+    </div>
+  </section>
+
+  <section id="kontakt" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Kontakt</span>
+        <h2>Pokličite in se dogovorimo</h2>
+        <p class="lead">Termin je treba vedno rezervirati vnaprej po telefonu.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="card">
+          <div class="person"><b>Kaja Meta Premuš</b><a class="num" href="tel:+38651338865">051 338 865</a></div>
+          <div class="person"><b>Niko Premuš</b><a class="num" href="tel:+38641979421">041 979 421</a></div>
+          <a class="social" href="https://www.facebook.com/pasji.vrtec" target="_blank" rel="noopener">
+            <span class="social-ico"><svg aria-hidden="true"><use href="#facebook"/></svg></span>
+            <span><b>Facebook</b><small>Fotografije in novice</small></span>
+          </a>
+        </div>
+        <div class="card">
+          <h3>Delovni čas</h3>
+          <dl class="hours">
+            <dt>Ponedeljek–petek</dt><dd>7.00–18.00</dd>
+            <dt>Sobota, nedelja, prazniki</dt><dd>8.00–20.00</dd>
+          </dl>
+          <p class="small">Sprejem in oddaja psov v teh urah.</p>
+        </div>
+        <div class="card">
+          <h3>Kje smo</h3>
+          <p><b>Pržanjska ulica 19</b><br>1000 Ljubljana</p>
+          <a class="linkline" href="https://www.google.com/maps/search/?api=1&query=Pr%C5%BEanjska+ulica+19%2C+1000+Ljubljana" target="_blank" rel="noopener">Odpri v Google Zemljevidih →</a>
+          <p class="small">Najboljši prijatelj, varstvo in sprehajanje psov, Niko Premuš s.p. · Kamnogoriška cesta 64, 1000 Ljubljana · Davčna št. 49816110</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© Najboljši prijatelj, Niko Premuš s.p.</span>
+    <span>Varstvo psov · Pasji vrtec · Pasji hotel · Ljubljana</span>
+    <p class="site-credit">Izdelava spletne strani: <a href="https://lgeti.github.io/" target="_blank" rel="noopener">Ignat Pocevski</a></p>
+  </div>
+</footer>
+
+<dialog class="lb" id="lb" aria-label="Povečana fotografija">
+  <img id="lb-img" alt="">
+  <div class="lb-bar">
+    <button type="button" id="lb-prev" aria-label="Prejšnja fotografija">←</button>
+    <button type="button" id="lb-close">Zapri</button>
+    <button type="button" id="lb-next" aria-label="Naslednja fotografija">→</button>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  // gallery: photos from the old website plus recent ones from Facebook
+  const photos=["img/fb-skupina.jpg","img/fb-trop-1.jpg","img/fb-crni.jpg","img/fb-sprehod.jpg"];
+  for(let i=1;i<=20;i++)photos.push("img/ref-"+String(i).padStart(2,"0")+".jpg");
+  const g=document.getElementById("gallery");
+  photos.forEach((src,i)=>{
+    const a=document.createElement("a");
+    a.href=src; a.dataset.i=i;
+    a.setAttribute("aria-label","Povečaj fotografijo "+(i+1));
+    a.innerHTML='<div class="ph"><img loading="lazy" src="'+src+'" alt="Pes v varstvu, fotografija '+(i+1)+'"><div class="fb"><svg><use href="#paw"/></svg>Foto '+(i+1)+'</div></div>';
+    g.appendChild(a);
+  });
+  function watch(img){
+    const mark=()=>img.closest(".ph").classList.add("missing");
+    img.addEventListener("error",mark);
+    if(img.complete&&img.naturalWidth===0)mark();
+  }
+  document.querySelectorAll(".ph img").forEach(watch);
+
+  // lightbox
+  const lb=document.getElementById("lb"),lbImg=document.getElementById("lb-img");
+  let cur=0;
+  const show=i=>{cur=(i+photos.length)%photos.length;lbImg.src=photos[cur];lbImg.alt="Fotografija "+(cur+1)+" od "+photos.length;};
+  if(lb.showModal){
+    g.addEventListener("click",e=>{const a=e.target.closest("a[data-i]");if(!a)return;e.preventDefault();show(+a.dataset.i);lb.showModal();});
+    document.getElementById("lb-close").onclick=()=>lb.close();
+    document.getElementById("lb-prev").onclick=()=>show(cur-1);
+    document.getElementById("lb-next").onclick=()=>show(cur+1);
+    lb.addEventListener("click",e=>{if(e.target===lb)lb.close();});
+    lb.addEventListener("keydown",e=>{if(e.key==="ArrowLeft")show(cur-1);if(e.key==="ArrowRight")show(cur+1);});
+  }
+
+  // tabs
+  const tabs=[["t-night","p-night"],["t-day","p-day"]];
+  tabs.forEach(([t,p])=>document.getElementById(t).addEventListener("click",()=>{
+    tabs.forEach(([t2,p2])=>{document.getElementById(t2).setAttribute("aria-selected",t2===t);document.getElementById(p2).hidden=p2!==p;});
+  }));
+
+  // calculator
+  const tiers=[[1,33],[3,30],[7,27],[14,24],[20,21],[30,20]];
+  const rate=d=>tiers.find(([max])=>d<=max)[1];
+  const days=document.getElementById("days"),extra=document.getElementById("extra");
+  const d1=document.getElementById("dog1"),d2=document.getElementById("dog2");
+  let dogs=1;
+  function calc(){
+    const d=+days.value,r=rate(d);
+    let total=d*r; let parts=[d+(d===1?" dan":" dni")+" × "+r+" €"];
+    if(dogs===2){total+=d*r*0.5;parts.push("drugi pes −50 %");}
+    if(extra.checked){total+=d*5;parts.push("doplačilo 5 €/dan");}
+    document.getElementById("days-out").textContent=d;
+    document.getElementById("total").textContent=(Math.round(total*100)/100).toLocaleString("sl-SI")+" €";
+    document.getElementById("breakdown").textContent=parts.join(" · ");
+  }
+  [d1,d2].forEach((b,i)=>b.addEventListener("click",()=>{dogs=i+1;d1.setAttribute("aria-pressed",dogs===1);d2.setAttribute("aria-pressed",dogs===2);calc();}));
+  days.addEventListener("input",calc); extra.addEventListener("change",calc);
+  document.getElementById("calc").addEventListener("submit",e=>e.preventDefault());
+  calc();
+})();
+</script>
+</body>
+</html>
